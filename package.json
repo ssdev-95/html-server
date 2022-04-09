@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "ts-node-dev src/index.ts --watch",
-    "server:dev": "node ts-node-dev src/server/index.ts --watch"
+    "server:dev": "ts-node-dev src/server/index.ts --watch"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

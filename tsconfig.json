@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
     //Visit https://aka.ms/tsconfig.json
-    "target": "esnext",
-		"module": "ESNext",
-    //"module": "commonjs",
-
-    // "rootDir": "./",
-    //"moduleResolution": "node",
-    "baseUrl": "./src",
-    // "paths": {},
-    // "rootDirs": [],
+    "target": "es2017",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "skipLibCheck": true,
     "typeRoots": [
 			"node_modules/@types",
 			"./src/html-server.d.ts"
@@ -20,10 +17,5 @@
     // "outFile": "./",
     // "outDir": "./",
     // "allowSyntheticDefaultImports": true,
-
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
   }
 }
