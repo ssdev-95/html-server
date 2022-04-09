@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Files to serve inside _temp folder
+_temp/**/*.html
+_temp/**/*.css
+_temp/**/*.js
