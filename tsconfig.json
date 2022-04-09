@@ -12,7 +12,7 @@
     // "rootDirs": [],
     "typeRoots": [
 			"node_modules/@types",
-			"./src/types.d.ts"
+			"./src/html-server.d.ts"
 		],
     // "types": [],
     // "allowJs": true,

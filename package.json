@@ -1,14 +1,21 @@
 {
   "name": "html-server",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "ts-node-dev src/index.ts --watch",
+    "server:dev": "node ts-node-dev src/server/index.ts --watch"
+  },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "^17.0.23",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "chokidar": "^3.5.3"
+    "chokidar": "^3.5.3",
+    "express": "^4.17.3"
   }
 }
