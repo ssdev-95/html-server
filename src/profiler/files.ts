@@ -25,7 +25,12 @@ export function copyFile(
 	const dest = `${destination}/${filename}`
 
 	if(fs.lstatSync(src).isDirectory()) {
-		copyFolder(src, dest)
+		if(!fs.existsSync(dest)){
+			fs.mkdirSync(dest)
+			copyFolder(src, dest)
+		} else {
+		  copyFolder(src, dest)
+		}
   } else {
 		fs.copyFile(src, dest, err => {
 			if (err) {

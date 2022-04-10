@@ -4,10 +4,10 @@ import path from "path"
 const PORT = process.env.PORT ?? 9999
 const DIR = path.join(process.cwd(), "src/views")
 
-const server = express()
-server.use(express.static(dir))
+const app = express()
+app.use(express.static(DIR))
 
-server.get(
+app.get(
 	"/:file",
 	(req:Request, res:Response) => {
 		const { file: src } = req?.params
@@ -16,8 +16,5 @@ server.get(
 	}
 )
 
-server.listen(
-	PORT,
-	() => console.log(`Server is running at ${PORT}`)
-)
+export const server = app.listen(PORT)
 
