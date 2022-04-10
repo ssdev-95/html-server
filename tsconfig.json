@@ -7,6 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
+		"outDir": "./build",
     "typeRoots": [
 			"node_modules/@types",
 			"./src/html-server.d.ts"
@@ -15,7 +16,6 @@
     // "allowJs": true,
     // "declaration": true,
     // "outFile": "./",
-    // "outDir": "./",
     // "allowSyntheticDefaultImports": true,
   }
 }

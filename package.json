@@ -1,22 +1,24 @@
 {
   "name": "html-server",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
-    "dev": "ts-node-dev src/init.ts --watch",
-    "server:dev": "ts-node-dev src/server/index.ts --watch"
+    "start": "node build/server.js",
+    "dev": "ts-node-dev src/server.ts --watch",
+		"build": "tsc"
   },
   "devDependencies": {
+    "@types/connect-livereload": "^0.6.0",
     "@types/express": "^4.17.13",
+    "@types/livereload": "^0.9.2",
     "@types/node": "^17.0.23",
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "chokidar": "^3.5.3",
-    "express": "^4.17.3",
-    "express-handlebars": "^6.0.4"
+    "express": "^4.17.3"
   }
 }
