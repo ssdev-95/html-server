@@ -108,4 +108,7 @@ _temp/**/*.html
 _temp/**/*.css
 _temp/**/*.js
 
-*.hbs
+src/views/**/*.html
+src/views/**/*.css
+src/views/**/*.js
+

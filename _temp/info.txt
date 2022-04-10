@@ -1,4 +1,1 @@
-Put all the project files
-that must be watched in this folder!
-
-Use this app at your own risk! :D
+Place your files here

@@ -1,4 +1,1 @@
-All the engine files will be
-automatically placed in this folder!
-
-Use this app at your own risk! :D
+Some files will be auto generated here
