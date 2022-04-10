@@ -23,6 +23,7 @@ app.get(
 	"/:file",
 	(req:Request, res:Response) => {
 		const { file: src } = req?.params
+		console.log(req.url)
 		const file = `${DIR}/${src}`
 		res.render(file)
 	}

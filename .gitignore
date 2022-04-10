@@ -108,8 +108,5 @@ dist
 _temp/**/*.html
 _temp/**/*.css
 _temp/**/*.js
-
-src/views/**/*.html
-src/views/**/*.css
-src/views/**/*.js
+_temp/**/*.ico
 
