@@ -4,20 +4,40 @@ import fs from "node:fs"
 
 import { exec } from "node:child_process"
 
+const valid_extensions = [
+	".html", ".css", ".js"
+]
 const dir = path.join(process.cwd(), "_temp")
 const destDir = path.join(process.cwd(), "src/views")
 const profiler = chokidar.watch(dir, {
 	ignored: '*.txt'
 })
 
-function copyFile(filename:string) {
-	const src = `${dir}/${filename}`
-	const dest = `${destDir}/${filename.replace(".html", ".hbs")}`
-	fs.copyFile(src, dest, 0, err => {
-		if (err) {
-			console.log("Falied to copy file.\n", err)
+function hasValidExtension(filename:string) {
+	let valids:number[] = []
+  
+	for (let ext of valid_extensions) {
+		if(!filename.includes(ext)) {
+			valids.push(0)
+		} else {
+			valids.push(1)
 		}
-  })
+	}
+	
+	return valids.some(i => i === 1);
+}
+
+function copyFile(filename:string) {
+	if(hasValidExtension(filename)) {
+		const src = `${dir}/${filename}`
+  	const dest = `${destDir}/${
+  		filename.includes(".html") ?
+   		filename.replace(".html", ".hbs") :
+			filename
+  	}`
+
+  	fs.cp(src, dest, (err) => (err && console.log(err)))
+	}
 }
 
 function serverUp() {
@@ -31,11 +51,8 @@ function setup() {
 			return;
 		}
 
-	  files.forEach(file => {
-			if (file.includes(".html")) {
-				copyFile(file)
-			}
-		})
+		console.log(files)
+	  //files.forEach(file => copyFile(file))
 	})
 
 	console.log("Setup done. Forwarding..")
