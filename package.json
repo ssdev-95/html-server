@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "ts-node-dev src/index.ts --watch",
+    "dev": "ts-node-dev src/init.ts --watch",
     "server:dev": "ts-node-dev src/server/index.ts --watch"
   },
   "devDependencies": {
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "chokidar": "^3.5.3",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.4"
   }
 }
