@@ -34,3 +34,4 @@ app.listen(
 	() => console.log(`Server is running at port ${PORT}`)
 )
 
+export { liveReloadServer }

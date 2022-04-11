@@ -1,7 +1,9 @@
-//TODO: Get flags and setup.chokidar using them
 import { Command } from "commander"
+import { watcher, setup, serverUp } from "./watcher"
+import { liveReloadServer } from "./server"
 
 const program = new Command()
+let dir: string;
 
 program
   .name('html-server')
@@ -10,8 +12,15 @@ program
 program
   .command('serve')
 	.option('-f separator <char>')
-	.action((str, options) => {
-		console.log(str)
+	.action((str) => {
+		dir = str.separator as string;
+		setup(dir)
 	})
 
 program.parse()
+
+watcher.on('ready', serverUp)
+watcher.on('change', () => {
+	setup(dir)
+	liveReloadServer.refresh("/")
+})
