@@ -6,7 +6,7 @@
   "scripts": {
     "server:start": "node build/server/index.js",
     "server:dev": "ts-node-dev src/server/index.ts --watch",
-    "start": "node build/init.js",
+    "start": "node ./build/init.js",
     "dev": "ts-node-dev src/init.ts",
     "build": "tsc"
   },

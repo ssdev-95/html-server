@@ -1,0 +1,10 @@
+version: "2.2"
+services:
+  node:
+    build: ./
+    # image: node:16.14.2-slim
+    # restart: "always"
+    # working_dir: "/home/Projects/html-server"
+    # ports:
+    #   - "9998:9999"
+    # command: "yarn build && yarn start"
