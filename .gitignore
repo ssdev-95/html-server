@@ -105,8 +105,5 @@ dist
 .tern-port
 
 # Files to serve inside _temp folder
-_temp/**/*.html
-_temp/**/*.css
-_temp/**/*.js
-_temp/**/*.ico
+_temp/
 

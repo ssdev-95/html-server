@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import path from "node:path"
 
 export function copyFolder(folder:string, dest:string) {
 	fs.readdir(folder, (err, files) => {
@@ -38,4 +39,9 @@ export function copyFile(
 		fs.mkdirSync(destination)
 		copyFile(filename, dir, destination)
 	}
+}
+
+export function destroyTempFolder() {
+	const temp = path.join(process.cwd(), "_temp")
+	fs.rmSync(temp, { recursive: true, force: true })
 }
