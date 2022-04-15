@@ -1,17 +1,19 @@
 {
   "name": "html-server",
 	"displayName": "html-server",
-	"description": "",
-	"version": "0.0.1",
+	"description": "An alternative to live server and html preview",
+	"version": "0.1.0.",
 	"engines": {
 		"vscode": "^1.66.0"
 	},
 	"categories": [
-		"Other"
+		"Other",
+		"Dev tools"
 	],
 	"activationEvents": [
-        "onCommand:html-server.helloWorld",
-        "onCommand:html-server.hi"
+    "onCommand:html-server.helloWorld",
+		"onCommand:html-server.start",
+		"onCommand:html-server.stop"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -21,8 +23,12 @@
 				"title": "Hello World"
 			},
 			{
-				"command": "html-server.hi",
-				"title": "Hi"
+				"command": "html-server.start",
+				"title": "Starting server"
+			},
+			{
+				"command": "html-server.stop",                   
+				"title": "Stoping server"
 			}
 		]
 	},
