@@ -22,7 +22,10 @@ export function activate(context: vscode.ExtensionContext) {
 	let start = vscode.commands.registerCommand(
 		'html-server.start',
 		() => {
-		  const workspace = vscode.workspace.getWorkspaceFolder.name;
+			const workspaceName = vscode.workspace.name as string;
+			const folderPath:unknown = `${process.cwd()}/${workspaceName}`;
+		  const workspace = vscode.workspace.getWorkspaceFolder(folderPath as vscode.Uri);
+			console.log(workspace?.uri);
 			vscode.window.showInformationMessage(`Started server on folder ${workspace}!`);
 		}
 	);
@@ -30,9 +33,9 @@ export function activate(context: vscode.ExtensionContext) {
 	let stop = vscode.commands.registerCommand(
 		'html-server.stop',
 		() => {
-			vscode.window.showInformationMessage('Server successfully stoped!')
+			vscode.window.showInformationMessage('Server successfully stoped!');
 		}
-	)
+	);
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(start);

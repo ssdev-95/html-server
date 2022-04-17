@@ -2,13 +2,13 @@
   "name": "html-server",
 	"displayName": "html-server",
 	"description": "An alternative to live server and html preview",
-	"version": "0.1.0.",
+	"version": "0.1.25",
 	"engines": {
 		"vscode": "^1.66.0"
 	},
 	"categories": [
 		"Other",
-		"Dev tools"
+		"Education"
 	],
 	"activationEvents": [
     "onCommand:html-server.helloWorld",
