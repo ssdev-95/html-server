@@ -24,11 +24,11 @@
 			},
 			{
 				"command": "html-server.start",
-				"title": "Starting server"
+				"title": "Start server"
 			},
 			{
 				"command": "html-server.stop",                   
-				"title": "Stoping server"
+				"title": "Stop server"
 			}
 		]
 	},

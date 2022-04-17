@@ -22,10 +22,8 @@ export function activate(context: vscode.ExtensionContext) {
 	let start = vscode.commands.registerCommand(
 		'html-server.start',
 		() => {
-			const workspaceName = vscode.workspace.name as string;
-			const folderPath:unknown = `${process.cwd()}/${workspaceName}`;
-		  const workspace = vscode.workspace.getWorkspaceFolder(folderPath as vscode.Uri);
-			console.log(workspace?.uri);
+			const workspace = vscode.workspace.workspaceFolders[0].uri.path
+			console.log(workspace);
 			vscode.window.showInformationMessage(`Started server on folder ${workspace}!`);
 		}
 	);
