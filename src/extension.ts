@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 
 import * as vscode from 'vscode';
+import { serverUp, setup, destroyTempFolder } from './watcher';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,15 +23,18 @@ export function activate(context: vscode.ExtensionContext) {
 	let start = vscode.commands.registerCommand(
 		'html-server.start',
 		() => {
-			const workspace = vscode.workspace.workspaceFolders[0].uri.path
-			console.log(workspace);
-			vscode.window.showInformationMessage(`Started server on folder ${workspace}!`);
+			const folders = vscode.workspace?.workspaceFolders;
+			const workspace = folders ? folders[0]?.uri.path : 'empty';
+			setup(workspace);
+			setTimeout(serverUp, 10000);
+			vscode.window.showInformationMessage(`Started server on folder ${workspace} :D`);
 		}
 	);
 
 	let stop = vscode.commands.registerCommand(
 		'html-server.stop',
 		() => {
+			destroyTempFolder();
 			vscode.window.showInformationMessage('Server successfully stoped!');
 		}
 	);
