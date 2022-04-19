@@ -1,7 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 
 import * as vscode from 'vscode';
-import { serverUp, setup, destroyTempFolder } from './watcher';
+import { watcher, serverUp, setup, destroyTempFolder } from './watcher';
+import { liveReloadServer } from "./server"
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -26,7 +27,11 @@ export function activate(context: vscode.ExtensionContext) {
 			const folders = vscode.workspace?.workspaceFolders;
 			const workspace = folders ? folders[0]?.uri.path : 'empty';
 			setup(workspace);
-			setTimeout(serverUp, 10000);
+			watcher.on('ready' serverUp);
+			watcher.on('change', () => {
+				setup(workspace);
+				liveReloadServer.refresh("/");
+			});
 			vscode.window.showInformationMessage(`Started server on folder ${workspace} :D`);
 		}
 	);
