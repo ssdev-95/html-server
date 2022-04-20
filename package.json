@@ -68,6 +68,7 @@
 	"dependencies": {
 		"chokidar": "^3.5.3",
 		"connect-livereload": "^0.6.1",
+		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
 		"livereload": "^0.9.3"
 	}

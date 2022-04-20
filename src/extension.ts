@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode';
 import { watcher, serverUp, setup, destroyTempFolder } from './watcher';
-import { liveReloadServer } from "./server"
+import { liveReloadServer } from "./server";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -27,8 +27,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const folders = vscode.workspace?.workspaceFolders;
 			const workspace = folders ? folders[0]?.uri.path : 'empty';
 			setup(workspace);
-			watcher.on('ready' serverUp);
-			watcher.on('change', () => {
+			watcher && watcher.on('ready', serverUp);
+			watcher && watcher.on('change', () => {
 				setup(workspace);
 				liveReloadServer.refresh("/");
 			});
