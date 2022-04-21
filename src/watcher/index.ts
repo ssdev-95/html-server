@@ -1,5 +1,6 @@
 import chokidar from "chokidar";
 import { copyFolder, destroyTempFolder } from "./files-handler";
+import { liveReloadServer } from "../server";
 
 import path from "node:path";
 import { exec } from "node:child_process";
@@ -7,7 +8,7 @@ import { exec } from "node:child_process";
 const mode = process.env.NODE_ENV;
 const destinationDir = path.join(process.cwd(), "_temp");
 
-let watcher:chokidar.FSWatcher | null = null;
+let watcher:chokidar.FSWatcher;
 
 function serverUp() {
   switch (mode) {

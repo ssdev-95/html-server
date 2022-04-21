@@ -2,7 +2,7 @@
 	"name": "html-server",
 	"displayName": "html-server",
 	"description": "An alternative to live server and html preview",
-	"version": "0.1.25",
+	"version": "0.1.26",
 	"engines": {
 		"vscode": "^1.66.0"
 	},
@@ -11,17 +11,12 @@
 		"Education"
 	],
 	"activationEvents": [
-		"onCommand:html-server.helloWorld",
 		"onCommand:html-server.start",
 		"onCommand:html-server.stop"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "html-server.helloWorld",
-				"title": "Hello World"
-			},
 			{
 				"command": "html-server.start",
 				"title": "Start server"
