@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode';
 import { liveReloadServer, server } from './server';
-import { watcher, serverUp, setup, destroyTempFolder } from './watcher';
+import { watcher, serverUp, setup, serverDown, destroyTempFolder } from './watcher';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 		'html-server.stop',
 		() => {
 			liveReloadServer.close();
-			server.close();
+			serverDown();
 			watcher.close();
 			destroyTempFolder();
 			vscode.window.showInformationMessage('Server successfully stoped!');

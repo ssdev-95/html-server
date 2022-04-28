@@ -3,22 +3,27 @@ import { copyFolder, destroyTempFolder } from "./files-handler";
 import { liveReloadServer } from "../server";
 
 import path from "node:path";
-import { exec } from "node:child_process";
+import { exec, ChildProcess } from "node:child_process";
 
 const mode = process.env.NODE_ENV;
 const destinationDir = path.join(process.cwd(), "_temp");
 
 let watcher:chokidar.FSWatcher;
+let childProcess:ChildProcess;
 
 function serverUp() {
   switch (mode) {
     case "PRODUCTION":
-      exec("yarn server:prod");
+      childProcess = exec("yarn server:prod");
       break;
     default:
-      exec("yarn server:dev");
+      childProcess = exec("yarn server:dev");
       break;
   }
+}
+
+function serverDown() {
+  childProcess.kill(childProcess.pid);
 }
 
 function setup(currentDir:string) {
@@ -27,4 +32,4 @@ function setup(currentDir:string) {
   console.log("Setup done, fastforwarding..");
 }
 
-export { watcher, destroyTempFolder, serverUp, setup, exec };
+export { watcher, destroyTempFolder, serverUp, serverDown, setup, exec };
