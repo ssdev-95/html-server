@@ -39,11 +39,18 @@ export function activate(context: vscode.ExtensionContext) {
 	let stopServer = vscode.commands.registerCommand(
 		'html-server.stop',
 		() => {
-			serverDown();
-			liveReloadServer.close();
-			watcher.close();
-			destroyTempFolder();
-			vscode.window.showInformationMessage('Server successfully stoped!');
+			try {
+				serverDown();
+				liveReloadServer.removeAllListeners();
+				liveReloadServer.watcher.close();
+				liveReloadServer.close();
+				watcher.removeAllListeners();
+				watcher.close();
+				destroyTempFolder();
+				vscode.window.showInformationMessage('Server successfully stoped!');
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	);
 

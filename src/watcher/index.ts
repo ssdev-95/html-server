@@ -11,7 +11,7 @@ const destinationDir = path.join(process.cwd(), "_temp");
 let watcher:chokidar.FSWatcher;
 let childProcess:ChildProcess;
 
-const KILL_SIGNAL = "SERVER:SIGTERM"
+const KILL_SIGNAL = "SIGTERM";
 
 function serverUp() {
   switch (mode) {
@@ -32,7 +32,7 @@ function serverUp() {
 
 function serverDown() {
   childProcess.kill(KILL_SIGNAL);
-	console.log(`Process PID:${childProcess.pid} has sucessfully terminated`)
+	console.log(`Process PID:${childProcess.pid} has sucessfully terminated`);
 }
 
 function setup(currentDir:string) {
