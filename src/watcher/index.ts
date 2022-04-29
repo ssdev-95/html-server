@@ -11,19 +11,28 @@ const destinationDir = path.join(process.cwd(), "_temp");
 let watcher:chokidar.FSWatcher;
 let childProcess:ChildProcess;
 
+const KILL_SIGNAL = "SERVER:SIGTERM"
+
 function serverUp() {
   switch (mode) {
     case "PRODUCTION":
-      childProcess = exec("yarn server:prod");
+      childProcess = exec(
+				"yarn server:prod",
+				{ killSignal: KILL_SIGNAL }
+			);
       break;
     default:
-      childProcess = exec("yarn server:dev");
+      childProcess = exec(
+				"yarn server:dev",
+				{ killSignal: KILL_SIGNAL }
+			);
       break;
   }
 }
 
 function serverDown() {
-  childProcess.kill(childProcess.pid);
+  childProcess.kill(KILL_SIGNAL);
+	console.log(`Process PID:${childProcess.pid} has sucessfully terminated`)
 }
 
 function setup(currentDir:string) {

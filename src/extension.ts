@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	//  Now provide the implementation of the command with registerCommand
 	//  The commandId parameter must match the command field in package.json
-	let start = vscode.commands.registerCommand(
+	let startServer = vscode.commands.registerCommand(
 		'html-server.start',
 		() => {
 			const folders = vscode.workspace?.workspaceFolders;
@@ -36,19 +36,19 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	let stop = vscode.commands.registerCommand(
+	let stopServer = vscode.commands.registerCommand(
 		'html-server.stop',
 		() => {
-			liveReloadServer.close();
 			serverDown();
+			liveReloadServer.close();
 			watcher.close();
 			destroyTempFolder();
 			vscode.window.showInformationMessage('Server successfully stoped!');
 		}
 	);
 
-	context.subscriptions.push(start);
-	context.subscriptions.push(stop);
+	context.subscriptions.push(startServer);
+	context.subscriptions.push(stopServer);
 }
 
 // this method is called when your extension is deactivated
