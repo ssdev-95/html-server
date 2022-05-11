@@ -1,34 +1,44 @@
-import "dotenv/config"
-import chokidar from "chokidar"
-import path from "node:path"
+import chokidar from "chokidar";
+import { copyFolder, destroyTempFolder } from "./files-handler";
+import { liveReloadServer } from "../server";
 
-import { exec } from "node:child_process"
-import { copyFolder } from "./files"
+import path from "node:path";
+import { exec, ChildProcess } from "node:child_process";
 
-const mode = process.env.NODE_ENV
-const destDir = path.join(process.cwd(), "_temp")
+const mode = process.env.NODE_ENV;
+const destinationDir = path.join(process.cwd(), "_temp");
 
-let watcher: chokidar.FSWatcher
+let watcher:chokidar.FSWatcher;
+let childProcess:ChildProcess;
+
+const KILL_SIGNAL = "SIGTERM";
 
 function serverUp() {
-	if(mode === "PRODUCTION") {
-    exec("yarn server:start")
-  } else {
-    exec("yarn server:dev")
+  switch (mode) {
+    case "PRODUCTION":
+      childProcess = exec(
+				"yarn server:prod",
+				{ killSignal: KILL_SIGNAL }
+			);
+      break;
+    default:
+      childProcess = exec(
+				"yarn server:dev",
+				{ killSignal: KILL_SIGNAL }
+			);
+      break;
   }
 }
 
-function setup(dir:string) {
-  watcher = chokidar.watch(dir, {
-    ignored: '*.txt'
-  })
-
-	copyFolder(dir, destDir)
-
-	console.log("Setup done. Forwarding..")
+function serverDown() {
+  childProcess.kill(KILL_SIGNAL);
+	console.log(`Process PID:${childProcess.pid} has sucessfully terminated`);
 }
 
-const profiler = { watcher, setup, serverUp }
+function setup(currentDir:string) {
+  watcher = chokidar.watch(currentDir);
+  copyFolder(currentDir, destinationDir);
+  console.log("Setup done, fastforwarding..");
+}
 
-export default profiler;
-export { setup, serverUp, watcher };
+export { watcher, destroyTempFolder, serverUp, serverDown, setup, exec };
