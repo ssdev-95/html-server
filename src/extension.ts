@@ -1,11 +1,11 @@
 // The module 'vscode' contains the VS Code extensibility API
 
 import * as vscode from 'vscode';
-import { liveReloadServer, server } from './server';
-import { watcher, serverUp, setup, serverDown, destroyTempFolder } from './watcher';
+import { CustomServer } from './watcher';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
+export const customServer = new CustomServer()
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "html-server" is now active!');
@@ -18,21 +18,17 @@ export function activate(context: vscode.ExtensionContext) {
 		() => {
 			const folders = vscode.workspace?.workspaceFolders;
 			const workspace = folders ? folders[0]?.uri.path : 'empty';
-			setup(workspace);
-			watcher?.on('ready', () => {
-				serverUp();
-				liveReloadServer.server.once("connection", () => {
-					setTimeout(() => {
-						liveReloadServer.refresh("/");
-						server.on('ready', () => console.log('lol'));
-					}, 100);
-				});
-			});
+			customServer.setup(workspace);
+			customServer.watcher?.on('ready',serverUp);
 	
 	  	// Display a message box to the user
 			setTimeout(() => {
-				vscode.window.showInformationMessage(`Started server on folder ${workspace} :D`);
-			}, 5000);
+				vscode
+					.window
+					.showInformationMessage(
+						`Started server on folder ${workspace} :D`
+					);
+			}, 5000)
 		}
 	);
 
@@ -40,13 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
 		'html-server.stop',
 		() => {
 			try {
-				serverDown();
-				liveReloadServer.removeAllListeners();
-				liveReloadServer.watcher.close();
-				liveReloadServer.close();
-				watcher.removeAllListeners();
-				watcher.close();
-				destroyTempFolder();
+				customServer.removeListeners();
 				vscode.window.showInformationMessage('Server successfully stoped!');
 			} catch (e) {
 				console.log(e);
